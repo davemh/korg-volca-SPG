@@ -13,6 +13,23 @@ body {
   padding: 30px;
 }
 
+.volca-docs {
+  width: 350px;
+  background: linear-gradient(#222, #111);
+  border: 4px solid #555;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #000;
+  margin-left: 20px;
+  padding: 20px;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 10px 10px;
+  line-height: 1.5;
+  a:link { color: #f5d76e; }
+  a:visited { color: red; }
+  }
+
 .volca-panel {
   width: 700px;
   background: linear-gradient(#222, #111);
@@ -456,10 +473,14 @@ function stopLED(){ led.classList.remove('on'); }
 
 </script>
 
-<p><a href="https://github.com/davemh/korg-volca-SPG/archive/refs/heads/main.zip">Download</a> Korg Volca SPG. For full documentation, or to contribute to the project, go <a href="https://github.com/davemh/korg-volca-SPG/blob/main/README.md">here</a>.</p>
+<div class="volca-docs">
+<p>Not running this locally?</br>
+<a href="https://github.com/davemh/korg-volca-SPG/archive/refs/heads/main.zip">Download Korg Volca SPG</a> for offline use.</p>
+<p>Read the <a href="https://github.com/davemh/korg-volca-SPG/blob/main/README.md">full documentation</a>.
+<p>Have ideas? <a href="https://github.com/davemh/korg-volca-SPG/">Contribute</a> to the project.</p>
 
-<p>Brought to you by <a href="https://reverse-engine.com">Reverse Engine Records</a>. Built around an idea from <a href="https://davemh.com">a Volca enthusiast</a>>, unaffialliated with Korg.</p>
-
+<p>Korg Volca Sync Pulse Generator is a browser-based tool for generating multi-measure Volca sync. Control Volcas from your browser, or generate a wav file of audio clock to drop into your DAW. It's also the missing app for anyone who needs clock to sync recording of Volcas to a hardware multitracker, be it digital or tape-based. Runs best in Chrome.</p>
+<p>Brought to you by <a href="https://reverse-engine.com">Reverse Engine Records</a>. Built around an idea from <a href="https://davemh.com">a Volca enthusiast</a>, unaffialliated with Korg.</p>
+</div>
 </body>
 </html>
-
