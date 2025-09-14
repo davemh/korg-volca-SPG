@@ -1,6 +1,9 @@
 # rerkvspg
 RER Korg Volca Sync Pulse Generator - a free, browser-based tool for generating multi-measure Volca sync, from <a href="https://reverse-engine.com">Reverse Engine Records</a>.
 
+<h2>Installation</h2>
+There's nothing to install! Just open the main .html file in your browser (works best in Chrome), and enjoy.
+
 <h2>Controls</h2>
 <p></p><b>Measures</b> input: input total number of measures.</p>
 
