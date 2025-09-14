@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RER Korg Volca Sync Pulse Generator</title>
+<style>
+body {
+  background: #111;
+  font-family: 'Verdana', sans-serif;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.volca-panel {
+  width: 700px;
+  background: linear-gradient(#222, #111);
+  border: 4px solid #555;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #000;
+  padding: 20px;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+h1 {
+  font-family: 'Courier New', monospace;
+  color: #f5d76e;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #f5d76e;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.control-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+input[type=number] {
+  width: 60px;
+  border-radius: 8px;
+  border: 2px solid #555;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: inset 0 2px #000;
+}
+
+/* Volca-style toggle */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;       
+  height: 24px;      
+  margin-top: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5); 
+  border-radius: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff; 
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: #222; 
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.switch input:checked + .slider {
+  background-color: red; 
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(26px); 
+  background-color: #fff; 
+}
+
+.led {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #300;
+  box-shadow: 0 0 5px #000;
+  margin-top: 10px;
+  transition: all 0.05s;
+}
+
+.led.on {
+  background: red;
+  box-shadow: 0 0 20px red;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+button {
+  background: linear-gradient(#333, #111);
+  color: #fff;
+  border-radius: 6px;
+  border: 2px solid #555;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 3px #000;
+  transition: 0.1s;
+}
+
+button:hover {
+  background: linear-gradient(#444, #222);
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px #000;
+}
+
+/* Rotary knob styles */
+.knob-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.knob {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(#666, #222);
+  border: 2px solid #555;
+  position: relative;
+  cursor: grab;
+  transition: transform 0.05s;
+}
+
+.knob::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 20px;
+  background: #f5d76e;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  transform-origin: bottom center;
+  border-radius: 2px;
+  transition: transform 0.05s;
+}
+
+.knob-value {
+  margin-top: 5px;
+  color: #f5d76e;
+}
+</style>
+</head>
+<body>
+
+<div class="volca-panel">
+<h1>RER Korg Volca Sync Pulse Generator</h1>
+
+<div class="controls">
+  <div class="control-group">
+    <label>Measures</label>
+    <input type="number" id="measures" value="4" min="1">
+  </div>
+  <div class="control-group">
+    <label>Beats/Measure</label>
+    <input type="number" id="beats" value="4" min="1">
+  </div>
+  <div class="control-group">
+    <label>BPM</label>
+    <input type="number" id="bpm" value="120" min="1">
+  </div>
+  <div class="control-group">
+    <label>Triplets</label>
+    <label class="switch">
+      <input type="checkbox" id="triplets">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <div class="control-group">
+    <label>Swing</label>
+    <label class="switch">
+      <input type="checkbox" id="swing">
+      <span class="slider"></span>
+    </label>
+    <div class="knob-container">
+      <div class="knob" id="swingKnob"></div>
+      <input type="number" id="swingInput" value="66" min="0" max="75" style="width:50px; margin-top:5px; text-align:center;">
+      <div class="knob-value" id="swingValue">66%</div>
+    </div>
+  </div>
+</div>
+
+<div class="toggle-container">
+  <label>LED</label>
+  <div id="led" class="led"></div>
+</div>
+
+<div class="buttons">
+  <button onclick="preview()">Play</button>
+  <button onclick="stopPreview()">Stop</button>
+  <button onclick="generate()">Export WAV</button>
+</div>
+</div>
+
+<script>
+// Swing knob logic
+let swingKnob = document.getElementById('swingKnob');
+let swingInput = document.getElementById('swingInput');
+let swingValueDisplay = document.getElementById('swingValue');
+let knobAngle = 0;
+
+function updateSwingDisplay(val){
+  swingValueDisplay.textContent = Math.round(val)+'%';
+  swingInput.value = Math.round(val);
+  knobAngle = val/75*270 - 135;
+  swingKnob.style.transform = `rotate(${knobAngle}deg)`;
+}
+
+swingInput.addEventListener('input', () => {
+  let val = parseFloat(swingInput.value);
+  if (isNaN(val)) val = 0;
+  val = Math.min(Math.max(val,0),75);
+  updateSwingDisplay(val);
+  if(previewSource) preview();
+});
+
+let dragging = false;
+swingKnob.addEventListener('mousedown', e => dragging=true);
+document.addEventListener('mouseup', e => dragging=false);
+document.addEventListener('mousemove', e => {
+  if(dragging){
+    const rect = swingKnob.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top + rect.height/2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    let angle = Math.atan2(dy, dx)*180/Math.PI;
+    let val = ((angle+135)/270)*75;
+    val = Math.min(Math.max(val,0),75);
+    updateSwingDisplay(val);
+    if(previewSource) preview();
+  }
+});
+updateSwingDisplay(66);
+
+// Audio engine
+let previewSource=null;
+let previewCtx=null;
+let led=document.getElementById('led');
+
+function getSettings(){
+  return {
+    measures: parseInt(document.getElementById('measures').value),
+    beatsPerMeasure: parseInt(document.getElementById('beats').value),
+    bpm: parseInt(document.getElementById('bpm').value),
+    swing: document.getElementById('swing').checked,
+    swingRatio: parseFloat(document.getElementById('swingInput').value)/100,
+    triplets: document.getElementById('triplets').checked
+  };
+}
+
+// Refresh preview automatically when inputs change
+const controls = [
+  document.getElementById('measures'),
+  document.getElementById('beats'),
+  document.getElementById('bpm'),
+  document.getElementById('triplets'),
+  document.getElementById('swing')
+];
+controls.forEach(ctrl => ctrl.addEventListener('input', () => { if(previewSource) preview(); }));
+
+function getPulseTimings({measures, beatsPerMeasure, bpm, swing, swingRatio, triplets}){
+  const beatsTotal = measures*beatsPerMeasure;
+  const pulses = [0]; // play trigger at start
+  const beatDuration = 60/bpm;
+  if(triplets){
+    const interval = beatDuration/3;
+    for(let i=0;i<beatsTotal*3;i++) pulses.push(i*interval);
+  } else {
+    const interval = beatDuration/2;
+    for(let i=0;i<beatsTotal*2;i++){
+      let time=i*interval;
+      if(swing && i%2===1) time=(i-1)*interval + interval*swingRatio;
+      pulses.push(time);
+    }
+  }
+  return pulses;
+}
+
+function getPulseBuffer(settings){
+  const pulseLength=0.005;
+  const timings=getPulseTimings(settings);
+  const duration=timings[timings.length-1]+0.1;
+  const bufferLength=Math.ceil(duration*44100);
+  const audioCtx=new (window.AudioContext||window.webkitAudioContext)();
+  const buffer=audioCtx.createBuffer(1, bufferLength, 44100);
+  const data=buffer.getChannelData(0);
+  timings.forEach(time=>{
+    const start=Math.floor(time*44100);
+    const end=Math.min(start+Math.floor(pulseLength*44100), bufferLength);
+    for(let j=start;j<end;j++) data[j]=1.0;
+  });
+  return {buffer, audioCtx};
+}
+
+function preview(){
+  stopPreview();
+  const settings=getSettings();
+  const {buffer, audioCtx}=getPulseBuffer(settings);
+  previewCtx=audioCtx;
+  previewSource=audioCtx.createBufferSource();
+  previewSource.buffer=buffer;
+  previewSource.connect(audioCtx.destination);
+  previewSource.start();
+  startLED(settings);
+}
+
+function stopPreview(){
+  if(previewSource){previewSource.stop(); previewSource.disconnect(); previewSource=null;}
+  if(previewCtx){previewCtx.close(); previewCtx=null;}
+  stopLED();
+}
+
+function generate(){
+  stopPreview();
+  const settings=getSettings();
+  const timings=getPulseTimings(settings);
+  const pulseLength=0.005;
+  const sampleRate=44100;
+  const duration=timings[timings.length-1]+0.1;
+  const bufferLength=Math.ceil(duration*sampleRate);
+  const offlineCtx=new (window.OfflineAudioContext||window.webkitOfflineAudioContext)(1, bufferLength, sampleRate);
+  const buffer=offlineCtx.createBuffer(1, bufferLength, sampleRate);
+  const data=buffer.getChannelData(0);
+  timings.forEach(time=>{
+    const start=Math.floor(time*sampleRate);
+    const end=Math.min(start+Math.floor(pulseLength*sampleRate), bufferLength);
+    for(let j=start;j<end;j++) data[j]=1.0;
+  });
+  const source=offlineCtx.createBufferSource();
+  source.buffer=buffer;
+  source.connect(offlineCtx.destination);
+  source.start();
+  offlineCtx.startRendering().then(rendered=>{
+    const wavBlob=bufferToWavBlob(rendered);
+    const url=URL.createObjectURL(wavBlob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=`korg-sync-${settings.measures}x${settings.beatsPerMeasure}-${settings.bpm}bpm.wav`;
+    a.click();
+  });
+}
+
+function bufferToWavBlob(buffer){
+  const numOfChan=buffer.numberOfChannels;
+  const length=buffer.length*numOfChan*2+44;
+  const bufferArray=new ArrayBuffer(length);
+  const view=new DataView(bufferArray);
+  const channels=[];
+  const sampleRate=buffer.sampleRate;
+  let pos=0;
+  function writeString(view, offset, string){ for(let i=0;i<string.length;i++) view.setUint8(offset+i,string.charCodeAt(i)); }
+  writeString(view,0,'RIFF');
+  view.setUint32(4,36+buffer.length*numOfChan*2,true);
+  writeString(view,8,'WAVE');
+  writeString(view,12,'fmt ');
+  view.setUint32(16,16,true);
+  view.setUint16(20,1,true);
+  view.setUint16(22,numOfChan,true);
+  view.setUint32(24,sampleRate,true);
+  view.setUint32(28,sampleRate*2*numOfChan,true);
+  view.setUint16(32,numOfChan*2,true);
+  view.setUint16(34,16,true);
+  writeString(view,36,'data');
+  view.setUint32(40,buffer.length*numOfChan*2,true);
+  pos=44;
+  for(let i=0;i<numOfChan;i++) channels.push(buffer.getChannelData(i));
+  let offset=0;
+  while(pos<length){
+    for(let i=0;i<numOfChan;i++){
+      let sample=Math.max(-1,Math.min(1,channels[i][offset]));
+      sample=sample<0?sample*0x8000:sample*0x7FFF;
+      view.setInt16(pos,sample,true);
+      pos+=2;
+    }
+    offset++;
+  }
+  return new Blob([bufferArray],{type:'audio/wav'});
+}
+
+// LED logic
+function startLED(settings){
+  stopLED();
+  const timings=getPulseTimings(settings);
+  let idx=0;
+  const start=performance.now();
+  function step(){
+    const now=(performance.now()-start)/1000;
+    if(idx<timings.length && now>=timings[idx]){
+      led.classList.add('on');
+      setTimeout(()=>led.classList.remove('on'),50);
+      idx++;
+    }
+    if(idx<timings.length) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function stopLED(){ led.classList.remove('on'); }
+
+</script>
+</body>
+</html>
