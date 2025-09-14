@@ -4,7 +4,8 @@ RER Korg Volca Sync Pulse Generator - a free, browser-based tool for generating 
 <img width="746" height="435" alt="image" src="https://github.com/user-attachments/assets/ae254a02-d9ec-4504-bc80-3b3befad39d0" />
 
 <h2>Installation</h2>
-There's nothing to install! Just open the main .html file in your browser (works best in Chrome), and enjoy.
+<img width="408" height="337" alt="image" src="https://github.com/user-attachments/assets/cf5a5ea1-b8ae-411e-8bfc-ecd6d2c8d440" />
+<p>There's nothing to install! Just download .zip, decompress, open <em>rerkvspg_v1.0.html</em> in your browser (works best in Chrome), and enjoy.</p>
 
 <h2>Controls</h2>
 <p></p><b>Measures</b> input: input total number of measures.</p>
