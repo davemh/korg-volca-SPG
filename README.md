@@ -1,5 +1,5 @@
-# rerkvspg
-RER Korg Volca Sync Pulse Generator - a free, browser-based tool for generating multi-measure Volca sync, from <a href="https://reverse-engine.com">Reverse Engine Records</a>.
+# korg-volca-SPG
+Korg Volca Sync Pulse Generator - a free, browser-based tool for generating multi-measure Volca sync, from <a href="https://reverse-engine.com">Reverse Engine Records</a>.
 
 <img width="746" height="435" alt="image" src="https://github.com/user-attachments/assets/ae254a02-d9ec-4504-bc80-3b3befad39d0" />
 
