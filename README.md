@@ -8,7 +8,7 @@ To use Korg Volca SPG in browser, without having to download files, check out th
 
 <h2>Local Installation</h2>
 <img width="408" height="337" alt="image" src="https://github.com/user-attachments/assets/cf5a5ea1-b8ae-411e-8bfc-ecd6d2c8d440" />
-<p>There's nothing to install! Just download .zip, decompress, open <em>rer_korg-volca-spg_v1.0.html</em> in your browser (Chrome recommended), and enjoy.</p>
+<p>There's nothing to install! Just download .zip, decompress, open <em>index.html</em> in your browser (Chrome recommended), and enjoy.</p>
 
 <h2>Controls</h2>
 <p></p><b>Measures</b> input: input total number of measures.</p>
