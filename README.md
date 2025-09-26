@@ -40,8 +40,9 @@ To use Korg Volca SPG in browser, without having to download files, check out th
 <p>If the sync pulse is playing, it will update as you change individual parameters, in real time.</p>
 
 <h2>Exporting & Using Korg Volca SPG Sync Pulse Audio Files</h2>
-Once you've adjusted all parameters to meet your needs, click Export WAV. Save the generated file on your local machine. Drop it into your DAW, or record it onto an empty track on your hardware multitracker. Hard pan it to either the right or left channel, hard pan all other tracks to the opposite channel. Use a stereo breakout cable to send the sync audio to your Volcas, and all other audio to your headphones.
+Once you've adjusted all parameters to meet your needs, click Export WAV. Save the generated file on your local machine. Record it onto your hardware multitracker, or (if digital) import it onto an empty track. Hard pan this track to either the right or left channel. Hard pan all other tracks to the opposite channel. Use a stereo breakout cable to send the sync audio to your Volcas, and all other audio to your headphones.
 
 <h2>Feature Roadmap</h2>
-Add a loop button which overrides the "Measures" input field, to enable longer jams when syncing the browser audio ouput directly to your Volcas.
-Add more detailed tutorial (or links to resources) to the "Exporting..." section of this file.
+Potential feature adds:
+<p>Add a loop button which overrides the "Measures" input field, to enable longer jams when syncing the browser audio ouput directly to your Volcas.</p>
+<p>Add more detailed tutorial (or links to resources) to the "Exporting..." section of this file, to explain how to use the exported file, for any potential user unfamiliar with the idea of tape-based sync.</p>
