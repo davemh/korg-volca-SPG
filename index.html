@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <title>RER Korg Volca Sync Pulse Generator</title>
 <style>
+
 body {
-  background: #111;
-  font-family: 'Verdana', sans-serif;
-  color: #eee;
+  background: #0a0a0a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #e0e0e0;
   display: flex;
   justify-content: center;
   padding: 30px;
@@ -15,82 +16,99 @@ body {
 
 .volca-docs {
   width: 350px;
-  background: linear-gradient(#222, #111);
-  border: 4px solid #555;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #000;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
   margin-left: 20px;
   padding: 20px;
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 10px 10px;
-  line-height: 1.5;
-  a:link { color: #f5d76e; }
-  a:visited { color: red; }
-  }
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.volca-docs a:link { color: #64b5f6; }
+.volca-docs a:visited { color: #90caf9; }
 
 .volca-panel {
   width: 700px;
-  background: linear-gradient(#222, #111);
-  border: 4px solid #555;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #000;
-  padding: 20px;
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 10px 10px;
+  background: #151515;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 30px;
 }
 
 h1 {
-  font-family: 'Courier New', monospace;
-  color: #f5d76e;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #fff;
   text-align: center;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px #f5d76e;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .controls {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  gap: 20px;
 }
 
 .control-group {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
 }
 
 .control-group label {
-  margin-bottom: 5px;
-  font-size: 14px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #999;
 }
 
 input[type=number] {
-  width: 60px;
-  border-radius: 8px;
-  border: 2px solid #555;
+  width: 70px;
+  border-radius: 4px;
+  border: 1px solid #444;
   background: #222;
   color: #fff;
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
   font-size: 16px;
-  box-shadow: inset 0 2px #000;
+  padding: 8px;
 }
 
-/* Volca-style toggle */
+input[type=number]:focus {
+  outline: none;
+  border-color: #64b5f6;
+  background: #2a2a2a;
+}
+
+.toggle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.toggle-container label {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #999;
+}
+
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px;       
+  width: 48px;       
   height: 24px;      
   margin-top: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.5); 
-  border-radius: 24px;
 }
 
 .switch input {
@@ -106,8 +124,8 @@ input[type=number] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #fff; 
-  transition: .4s;
+  background-color: #444; 
+  transition: background-color 0.3s;
   border-radius: 24px;
 }
 
@@ -118,65 +136,64 @@ input[type=number] {
   width: 20px;
   left: 2px;
   bottom: 2px;
-  background-color: #222; 
-  transition: .4s;
+  background-color: #fff; 
+  transition: transform 0.3s;
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .switch input:checked + .slider {
-  background-color: red; 
+  background-color: #64b5f6; 
 }
 
 .switch input:checked + .slider:before {
-  transform: translateX(26px); 
-  background-color: #fff; 
+  transform: translateX(24px); 
 }
 
 .led {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: #300;
-  box-shadow: 0 0 5px #000;
+  background: #2a2a2a;
   margin-top: 10px;
   transition: all 0.05s;
+  border: 1px solid #444;
 }
 
 .led.on {
-  background: red;
-  box-shadow: 0 0 20px red;
+  background: #ff3b30;
+  box-shadow: 0 0 12px rgba(255, 59, 48, 0.6);
 }
 
 .buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 30px;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 button {
-  background: linear-gradient(#333, #111);
+  background: #2a2a2a;
   color: #fff;
-  border-radius: 6px;
-  border: 2px solid #555;
-  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  padding: 10px 24px;
   cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 3px #000;
-  transition: 0.1s;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
 }
 
 button:hover {
-  background: linear-gradient(#444, #222);
+  background: #333;
+  border-color: #555;
 }
 
 button:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px #000;
+  background: #1a1a1a;
+  transform: scale(0.98);
 }
 
-/* Rotary knob styles */
 .knob-container {
   display: flex;
   flex-direction: column;
@@ -187,30 +204,36 @@ button:active {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: radial-gradient(#666, #222);
-  border: 2px solid #555;
+  background: #2a2a2a;
+  border: 2px solid #444;
   position: relative;
   cursor: grab;
   transition: transform 0.05s;
 }
 
+.knob:hover {
+  border-color: #555;
+}
+
 .knob::after {
   content: '';
   position: absolute;
-  width: 4px;
-  height: 20px;
-  background: #f5d76e;
-  top: 5px;
+  width: 3px;
+  height: 16px;
+  background: #64b5f6;
+  top: 6px;
   left: 50%;
   transform: translateX(-50%) rotate(0deg);
   transform-origin: bottom center;
-  border-radius: 2px;
+  border-radius: 1px;
   transition: transform 0.05s;
 }
 
 .knob-value {
-  margin-top: 5px;
-  color: #f5d76e;
+  margin-top: 8px;
+  color: #64b5f6;
+  font-size: 12px;
+  font-weight: 600;
 }
 </style>
 </head>
