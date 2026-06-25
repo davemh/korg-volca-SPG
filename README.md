@@ -7,7 +7,7 @@ Korg Volca Sync Pulse Generator - a free, browser-based tool for generating mult
 To use Korg Volca SPG in browser, without having to download files, check out the <a href="https://davemh.github.io/korg-volca-SPG/">live demo</a>. Fully tested and working in <a href="https://www.google.co.in/intl/en_uk/chrome/">Chrome 140</a> on Desktop, Duckduckgo for iOS v7.185.01, and Safari for iOS 18.6.2.
 
 <h2>Local Installation</h2>
-<img width="408" height="337" alt="image" src="[https://github.com/user-attachments/assets/cf5a5ea1-b8ae-411e-8bfc-ecd6d2c8d440](https://raw.githubusercontent.com/davemh/korg-volca-SPG/refs/heads/main/screenshot_korg-volca-spg.png)" />
+<img width="408" height="337" alt="image" src="https://raw.githubusercontent.com/davemh/korg-volca-SPG/refs/heads/main/screenshot_korg-volca-spg.png" />
 <p>There's nothing to install! Just download .zip, decompress, open <em>index.html</em> in your browser (Chrome recommended), and enjoy.</p>
 
 <h2>Controls</h2>
